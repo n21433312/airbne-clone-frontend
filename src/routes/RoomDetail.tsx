@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom"
 import { useQuery } from "@tanstack/react-query"
 import { getRoom, getRoomReviews } from "./api";
 import { IReview, IRoomDetail } from "../types";
-import { Box, Grid, Heading, Skeleton, Image, GridItem, VStack, HStack, Text, Avatar } from "@chakra-ui/react";
+import { Box, Grid, Heading, Skeleton, Image, GridItem, VStack, HStack, Text, Avatar, Container } from "@chakra-ui/react";
 import { FaStar } from "react-icons/fa"
 
 export default function RoomDetail() {
@@ -58,13 +58,32 @@ export default function RoomDetail() {
             <Avatar name={data?.owner.name} size={"xl"} src={data?.owner.avatar}  />
           </HStack>
           <Box mt={10}>
-            <Heading fontSize={"2xl"}>
+            <Heading mb={5} fontSize={"2xl"}>
                 <HStack>
                 <FaStar /><Text>{data?.rating}</Text>
                 <Text>•</Text>
                 <Text>{reviewsData?.length} reivew{reviewsData?.length === 1 ? "" : "s"}</Text>
                 </HStack>
             </Heading>
+            <Container mt ={15} maxW="container.lg" marginX="none">
+                <Grid  gap={10} templateColumns={"1fr 1fr"}>
+                    {reviewsData?.map((review, index) => (
+                    <VStack alignItems={"flex-start"} key={index}>
+                        <HStack>
+                            <Avatar name={review.user.name} src={review.user.avatar} size="md" />
+                            <VStack spacing={0} alignItems={"flex-star"}>
+                                <Heading fontSize={"md"}>{review.user.name}</Heading>
+                                <HStack spacing={1}>
+                                    <FaStar size="12px" />
+                                    <Text>{review.rating}</Text>
+                                </HStack>
+                            </VStack>
+                        </HStack>
+                        <Text>{review.payload}</Text>
+                    </VStack>
+                    ))}
+                </Grid>
+            </Container>
           </Box>
         </Box>
     );
