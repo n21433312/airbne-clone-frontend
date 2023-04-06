@@ -1,37 +1,30 @@
-import { Box, Grid, Heading, Image, VStack, Text, HStack } from "@chakra-ui/react";
-import { FaStar } from "react-icons/fa";
+import { Box, Grid, Heading, Image, VStack, Text, HStack, Button } from "@chakra-ui/react";
+import { FaRegHeart, FaStar } from "react-icons/fa";
+import Room from "../components/Room";
 
 export default function Home() {
     return ( 
         <Grid 
             mt={10}
-            px={40}
+            px={{
+                sm: "1fr",
+                md:"1fr 1fr",
+                lg: "repeat(3, 1fr)",
+                xl: "repeat(4, 1fr)",
+                "2xl": "reaeat(5, 1fr)",
+            }}
             columnGap={4} 
             rowGap={8} 
-            templateColumns={"repeat(5, 1fr)"}
+            templateColumns={{
+                base: "1fr",
+                lg: "repeat(5, 1fr)",
+            }}
         >
-            <VStack alignItems={"flex-start"}>
-                <Box overflow={"hidden"} mb={2} rounded="3xl">
-                    <Image 
-                    h="280"
-                    src="https://a0.muscache.com/im/pictures/prohost-api/Hosting-607458038229062130/original/1e20dfc7-ea12-44b2-a837-2bdcd8502133.jpeg?im_w=720" />
-                </Box>
-                <Box>
-                    <Grid gap={2} templateColumns={"6fr 1fr"}>
-                        <Text as="b" noOfLines={1} fontSize="md">
-                            Ganggu-myeon, Yeongdeok-gun, 경상북도, 한국
-                        </Text>
-                        <HStack spacing={1}>
-                            <FaStar size={15}/>
-                            <Text>5.0</Text>
-                        </HStack>
-                    </Grid>
-                    <Text fontSize={"sm"} color="gray.600">Seoul, S. Korea </Text>
-                </Box>
-                <Text fontSize={"sm"} color="gray.600">
-                    <Text as="b">$72</Text>/ night 
-                </Text>
-            </VStack>
+            {[1, 2, 3, 4, 5, 6, 12, 45, 5, 2, 1, 2, 7, 45, 8, 9, 12, 14, 7, 98, 45, 12, 13, 14, 15, 16, 17, 18,
+            12, 14, 2, 2, 2, 2, 2, 2, 2, 3,
+            ].map((index) => (
+                <Room key={index} />
+            ))}
         </Grid>
     );
 }

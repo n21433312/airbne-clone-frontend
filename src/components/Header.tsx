@@ -1,4 +1,4 @@
-import { Box, Button, HStack, IconButton, LightMode, useColorMode, useColorModeValue, useDisclosure } from "@chakra-ui/react";
+import { Box, Button, HStack, IconButton, LightMode, Stack, useColorMode, useColorModeValue, useDisclosure } from "@chakra-ui/react";
 import { FaAirbnb, FaMoon, FaSun } from "react-icons/fa";
 import LoginModal from "./LoginModal";
 import { Link } from "react-router-dom";
@@ -11,9 +11,19 @@ export default function Header() {
     const logoColor = useColorModeValue("red.500", "red.200");
     const Icon = useColorModeValue(FaMoon, FaSun)
     return (
-        <HStack 
+        <Stack 
               justifyContent={"space-between"} 
-              py={5} px={40} 
+              alignItems="center"
+              py={5} 
+              px={40} 
+              direction={{
+                sm: "column",
+                md: "row",
+              }}
+              spacing={{
+                sm: 4,
+                md: 0,
+              }}
               borderBottomWidth={1}
         >
             <Box color={logoColor} >
@@ -30,6 +40,6 @@ export default function Header() {
             </HStack>
                 <LoginModal isOpen={isLoginOpen} onClose={onLoginClose} />
                 <SignUpModal isOpen={isSignUpOpen} onClose={onSignUpClose} />
-            </HStack>
+            </Stack>
     )
  }
