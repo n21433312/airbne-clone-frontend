@@ -1,8 +1,28 @@
-import { Box, Grid, Heading, Image, VStack, Text, HStack, Button, Skeleton, SkeletonText } from "@chakra-ui/react";
-import { FaRegHeart, FaStar } from "react-icons/fa";
+import { Grid } from "@chakra-ui/react";
 import Room from "../components/Room";
+import {useQuery} from "@tanstack/react-query"
+import RoomSkeleton from "../components/RoomSkeleton";
+import { getRooms } from "./api";
+
+interface IPhoto{
+    pk: string;
+    file: string;
+    description: string;
+}
+
+interface IRoom{
+    "pk": number,
+    "name": string;
+    "country": string;
+    "city": string;
+    "price": number
+    "rating": number
+    "is_owner": boolean,
+    "photos": IPhoto[]
+}
 
 export default function Home() {
+    const {isLoading, data} = useQuery<IRoom[]>(["rooms"], getRooms); 
     return ( 
         <Grid 
             mt={10}
@@ -20,13 +40,31 @@ export default function Home() {
                 lg: "repeat(5, 1fr)",
             }}
         >
-            <Box>
-                <Skeleton rounded="2xl" height={280} mb={7} />
-                <SkeletonText w="50%" noOfLines={2} mb ={6} />
-                <SkeletonText w="20%" noOfLines={1} />
-            </Box>
-            <Room />
-            
+        
+        {isLoading ? (
+            <>
+                <RoomSkeleton />
+                <RoomSkeleton />
+                <RoomSkeleton />
+                <RoomSkeleton />
+                <RoomSkeleton />
+                <RoomSkeleton />
+                <RoomSkeleton />
+                <RoomSkeleton />
+                <RoomSkeleton />
+                <RoomSkeleton />
+            </>
+            ) : null}
+            {data?.map((room) => ( 
+                <Room 
+                    imageUrl={room.photos[0]?.file??"https:/source.unsplash.com/random/450*450"}
+                    name={room.name}
+                    rating={room.rating}
+                    city={room.city}
+                    country={room.country}
+                    price={room.price}
+                />
+            ))}
         </Grid>
     );
 }
