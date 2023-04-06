@@ -1,4 +1,4 @@
-import { Box, Grid, Heading, Image, VStack, Text, HStack, Button } from "@chakra-ui/react";
+import { Box, Grid, Heading, Image, VStack, Text, HStack, Button, Skeleton, SkeletonText } from "@chakra-ui/react";
 import { FaRegHeart, FaStar } from "react-icons/fa";
 import Room from "../components/Room";
 
@@ -20,11 +20,13 @@ export default function Home() {
                 lg: "repeat(5, 1fr)",
             }}
         >
-            {[1, 2, 3, 4, 5, 6, 12, 45, 5, 2, 1, 2, 7, 45, 8, 9, 12, 14, 7, 98, 45, 12, 13, 14, 15, 16, 17, 18,
-            12, 14, 2, 2, 2, 2, 2, 2, 2, 3,
-            ].map((index) => (
-                <Room key={index} />
-            ))}
+            <Box>
+                <Skeleton rounded="2xl" height={280} mb={7} />
+                <SkeletonText w="50%" noOfLines={2} mb ={6} />
+                <SkeletonText w="20%" noOfLines={1} />
+            </Box>
+            <Room />
+            
         </Grid>
     );
 }
