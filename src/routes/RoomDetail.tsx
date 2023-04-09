@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom"
 import { useQuery } from "@tanstack/react-query"
-import { getRoom, getRoomReviews } from "./api";
+import { getRoom, getRoomReviews } from "../api";
 import { IReview, IRoomDetail } from "../types";
 import { Box, Grid, Heading, Skeleton, Image, GridItem, VStack, HStack, Text, Avatar, Container } from "@chakra-ui/react";
 import { FaStar } from "react-icons/fa"

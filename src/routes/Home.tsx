@@ -2,7 +2,7 @@ import { Grid } from "@chakra-ui/react";
 import Room from "../components/Room";
 import {useQuery} from "@tanstack/react-query"
 import RoomSkeleton from "../components/RoomSkeleton";
-import { getRooms } from "./api";
+import { getRooms } from "../api";
 import { Link } from "react-router-dom";
 import { IRoomList } from "../types";
 
@@ -12,11 +12,8 @@ export default function Home() {
         <Grid 
             mt={10}
             px={{
-                sm: "1fr",
-                md:"1fr 1fr",
-                lg: "repeat(3, 1fr)",
-                xl: "repeat(4, 1fr)",
-                "2xl": "reaeat(5, 1fr)",
+                base: 10,
+                lg: 40,
             }}
             columnGap={4} 
             rowGap={8} 
