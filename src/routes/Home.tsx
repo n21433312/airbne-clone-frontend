@@ -5,9 +5,13 @@ import RoomSkeleton from "../components/RoomSkeleton";
 import { getRooms } from "../api";
 import { Link } from "react-router-dom";
 import { IRoomList } from "../types";
+import { useEffect } from "react";
 
 export default function Home() {
     const {isLoading, data} = useQuery<IRoomList[]>(["rooms"], getRooms); 
+    useEffect(() => {
+        console.log("hello");
+    },);
     return ( 
         <Grid 
             mt={10}
