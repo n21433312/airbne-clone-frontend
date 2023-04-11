@@ -7,6 +7,7 @@ export interface IRoomPhotoPhoto {
   
 
 export interface IRoomList {
+    id: number;
     pk: number;
     name: string;
     country: string;

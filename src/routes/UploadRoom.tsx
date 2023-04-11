@@ -28,25 +28,28 @@ import useHostOnlyPage from "../components/HostOnlyPage";
 import ProtectedPage from "../components/ProtectedPage";
 import { IUploadRoomVariables, getAmenities, getCategories, uploadRoom } from "../api";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { IAmenity, ICategory } from "../types";
+import { IAmenity, ICategory, IRoomDetail } from "../types";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 
 
 export default function UploadRoom() {
     const { register, handleSubmit } = useForm<IUploadRoomVariables>();
     const toast = useToast();
+    const navigate = useNavigate();
     const mutation = useMutation(uploadRoom, {
-        onSuccess:() => {
+        onSuccess:(data: IRoomDetail) => {
             toast({
                 status: "success",
                 title: "Room created",
                 position: "bottom-right",
-            })
-
+            });
+            navigate(`/rooms/${data.id}`)
         },
 
     });
     const {data: amenities, isLoading: isAmenitiesLoading} = useQuery<IAmenity[]>(["amenities"], getAmenities);
+    console.log(amenities, isAmenitiesLoading)
     const {data: categories, isLoading: isCategoriesLoading } = useQuery<ICategory[]>(["categories"], getCategories)
     useHostOnlyPage();
     const onsSubmint = (data:IUploadRoomVariables) => {
