@@ -7,6 +7,7 @@ import { IReview, IRoomDetail } from "../types";
 import { Box, Grid, Heading, Skeleton, Image, GridItem, VStack, HStack, Text, Avatar, Container, Button } from "@chakra-ui/react";
 import { FaStar } from "react-icons/fa"
 import { useEffect, useState } from "react";
+import { Helmet } from "react-helmet";
 
 export default function RoomDetail() {
     const { roomPk } = useParams();
@@ -17,7 +18,6 @@ export default function RoomDetail() {
         "check",
         roomPk,
         dates,
-
     ], checkBooking, {
         cacheTime: 0, 
         enabled: dates !== undefined,
@@ -35,6 +35,9 @@ export default function RoomDetail() {
             lg: 40,
           }}
         >
+          <Helmet>
+            <title>{data ? data.name : "Loading..."}</title>
+          </Helmet>
           <Skeleton height={"50px"} width="25%" isLoaded={!isLoading}>
             <Heading size={"md"}>{data?.name}</Heading>
           </Skeleton>
@@ -119,9 +122,9 @@ export default function RoomDetail() {
                     selectRange
                 />
                 <Button 
-                    disabled={checkBookingData?.ok}
+                    disabled={!checkBookingData?.ok}
                     isLoading={isCheckingBooking} 
-                    mt={5} 
+                    my={5} 
                     w="100%" 
                     colorScheme={"red"}
                 >
@@ -129,11 +132,10 @@ export default function RoomDetail() {
                 </Button>
                 {!isCheckingBooking && !checkBookingData?.ok ? (
                     <Text color="red.500">Can't book on those dates</Text>
-                ): null
-                }
-
+                ): null }
             </Box>
         </Grid>
     </Box>
+
     );
 }
