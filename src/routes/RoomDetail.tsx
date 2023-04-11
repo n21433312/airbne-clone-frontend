@@ -6,15 +6,26 @@ import { getRoom, getRoomReviews } from "../api";
 import { IReview, IRoomDetail } from "../types";
 import { Box, Grid, Heading, Skeleton, Image, GridItem, VStack, HStack, Text, Avatar, Container } from "@chakra-ui/react";
 import { FaStar } from "react-icons/fa"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function RoomDetail() {
     const { roomPk } = useParams();
     const { isLoading, data } = useQuery<IRoomDetail>([`rooms`, roomPk], getRoom);
-    const { data:reviewsData, isLoading:isReviewsLoading } = useQuery<IReview[]>(['rooms', roomPk, 'reviews'], getRoomReviews);
-    const [dates, setDates] = useState<Date | undefined>(undefined);
-    console.log(dates)
-    
+    const { data:reviewsData } = useQuery<IReview[]>(['rooms', roomPk, 'reviews'], getRoomReviews);
+    const [dates, setDates] = useState<Date[] | undefined>(undefined);
+    useEffect(() => {
+        if(dates){
+            const [firstDate, secondDate]= dates;
+            const checkIn = firstDate.toJSON().split("T");
+            const checkOut = secondDate.toJSON().split("T");
+            console.log(checkIn, checkOut)
+
+        }
+        console.log(dates);
+    }, [dates])
+    const handleDateChange = (value: any) => {
+        setDates(value);
+    }
     return (
         <Box
           mt={10}
@@ -98,8 +109,7 @@ export default function RoomDetail() {
             </Box>
             <Box pt={10}>
                 <Calendar
-                    onChange={setDates} 
-                    showDoubleView
+                    onChange={handleDateChange}
                     prev2Label={null}
                     next2Label={null}
                     minDetail="month" 
