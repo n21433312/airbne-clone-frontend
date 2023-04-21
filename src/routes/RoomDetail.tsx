@@ -8,6 +8,9 @@ import { Box, Grid, Heading, Skeleton, Image, GridItem, VStack, HStack, Text, Av
 import { FaStar } from "react-icons/fa"
 import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
+import ImageModal from "./ImageModal";
+import handleImageClick from "./handleImageClick";
+
 
 export default function RoomDetail() {
     const { roomPk } = useParams();
@@ -50,44 +53,44 @@ export default function RoomDetail() {
             templateRows={"1fr 1fr"}
             templateColumns={"repeat(4, 1fr)"}
         >
-            {[0, 1, 2, 3, 4].map((index) => (
-                <GridItem
-                    colSpan={index === 0 ? 2:1}
-                    rowSpan={index === 0 ? 2:1}
-                    overflow="hidden" key={index}
-                >
-                    <Skeleton isLoaded={ !isLoading } h="100%" w="100%" >
-                        {data?.photos && data.photos.length > 0 ? (
-                            <Image objectFit={"cover"} w="100%" h="100% "src={data?.photos[index].file} />
-                        ): null}
-
-                    </Skeleton>
-                </GridItem>
-            ))}
+            {data?.photos && data.photos.length > 0 ? (
+                <Grid templateColumns="repeat(5, 1fr)" gap={2}>
+                    {data.photos.map((photo, index) => (
+                        <Box key={photo.pk} onClick={() => handleImageClick()}>
+                        <Image src={photo.file} w="100%" h="100%" objectFit="cover" />
+                        </Box>
+                        ))
+                    }
+                </Grid>
+            ) : null}
           </Grid>
-          <Grid  gap={20} templateColumns={"2fr 1fr"} maxW="container.lg" >
+          <Grid  gap={10} templateColumns={"1fr 1fr"} maxW="container.xl" >
             <Box>
                 <HStack justifyContent={"space-between"} mt={10}>
                     <VStack alignItems={"flex-start"}>
                         <Skeleton isLoaded={!isLoading} height={"30px"}>
-                            <Heading fontSize="2xl">House hosted by {data?.owner.name}</Heading>
+                            <Heading fontSize="2xl"> {data?.owner.name} 님이 호스팅하는 숙소 </Heading>
                         </Skeleton>
                         <Skeleton isLoaded={!isLoading} height={"30px"}>
                             <HStack justifyContent={"flex-start"} w="100%">
-                                <Text>{data?.toilets} toilet{data?.toilets === 1 ? "" :"s"}</Text>
+                                <Text>{data?.toilets} 욕실</Text>
                                 <Text>•</Text>
-                                <Text>{data?.rooms} room{data?.rooms === 1 ? "" :"s"}</Text>
+                                <Text>{data?.rooms} 침실</Text>
                             </HStack>
                         </Skeleton>
                     </VStack>
                     <Avatar name={data?.owner.name} size={"xl"} src={data?.owner.avatar}  />
                 </HStack>
+                <Text fontSize="16px" fontWeight={"bold"}> 숙소설명</Text>
+                <Text>{data?.description}</Text>
+                <Text fontSize="16px" fontWeight={"bold"}> <br />상세설명 </Text>
+                <Text>{data?.long_description}</Text>
                 <Box mt={10}>
                     <Heading mb={5} fontSize={"2xl"}>
                         <HStack>
                         <FaStar /><Text>{data?.rating}</Text>
                         <Text>•</Text>
-                        <Text>{reviewsData?.length} reivew{reviewsData?.length === 1 ? "" : "s"}</Text>
+                        <Text>{reviewsData?.length}개의 후기 </Text>
                         </HStack>
                     </Heading>
                     <Container mt ={15} maxW="container.lg" marginX="none">
@@ -114,6 +117,7 @@ export default function RoomDetail() {
             <Box pt={10}>
                 <Calendar
                     onChange={handleDateChange}
+                    showDoubleView
                     prev2Label={null}
                     next2Label={null}
                     minDetail="month" 
@@ -128,10 +132,10 @@ export default function RoomDetail() {
                     w="100%" 
                     colorScheme={"red"}
                 >
-                    Make booking
+                    예약하기
                 </Button>
                 {!isCheckingBooking && !checkBookingData?.ok ? (
-                    <Text color="red.500">Can't book on those dates</Text>
+                    <Text color="red.500">이 날짜에는 예약할 수 없습니다</Text>
                 ): null }
             </Box>
         </Grid>

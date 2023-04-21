@@ -43,6 +43,7 @@ export interface IRoomDetail extends IRoomList {
     rooms: number;
     toilets: number;
     description: string;
+    long_description: string;
     address: string;
     pet_friendly: true;
     kind: string;

@@ -12,7 +12,7 @@ export default function SignUpModal({isOpen, onClose }: SignUpModalProps){
         <Modal onClose={onClose} isOpen={isOpen}>
         <ModalOverlay />
         <ModalContent>
-            <ModalHeader>Sign up</ModalHeader>
+            <ModalHeader>회원가입</ModalHeader>
             <ModalCloseButton />
             <ModalBody>
                 <VStack>
@@ -23,7 +23,7 @@ export default function SignUpModal({isOpen, onClose }: SignUpModalProps){
                             </Box>
                         } />
                             
-                        <Input variant={"filled"} placeholder="Name"/>
+                        <Input variant={"filled"} placeholder="이름"/>
                     </InputGroup>
                     <InputGroup>
                         <InputLeftElement children={
@@ -32,7 +32,7 @@ export default function SignUpModal({isOpen, onClose }: SignUpModalProps){
                             </Box>
                         } />
                             
-                        <Input variant={"filled"} placeholder="Email"/>
+                        <Input variant={"filled"} placeholder="이메일"/>
                     </InputGroup>
                     <InputGroup>
                         <InputLeftElement children={
@@ -41,7 +41,7 @@ export default function SignUpModal({isOpen, onClose }: SignUpModalProps){
                             </Box>
                         } />
                             
-                        <Input variant={"filled"} placeholder="username"/>
+                        <Input variant={"filled"} placeholder="아이디"/>
                     </InputGroup>
                     <InputGroup>
                         <InputLeftElement children={
@@ -49,10 +49,10 @@ export default function SignUpModal({isOpen, onClose }: SignUpModalProps){
                                 <FaLock />
                             </Box>
                          }/>
-                        <Input variant={"filled"} placeholder="password"/>
+                        <Input variant={"filled"} placeholder="비밀번호"/>
                     </InputGroup>
                 </VStack>
-                <Button mt={4} colorScheme="red" w="100%">Log in</Button>
+                <Button mt={4} colorScheme="red" w="100%">로그인</Button>
                 <SocialLogin /> 
             </ModalBody>
         </ModalContent>

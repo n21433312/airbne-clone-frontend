@@ -67,9 +67,9 @@ export default function Header() {
                 {!userLoading ? (
                     !isLoggedIn ? (
                         <>
-                            <Button onClick={onLoginOpen} >Log in</Button>
+                            <Button onClick={onLoginOpen} >로그인</Button>
                             <LightMode>
-                            <Button onClick={onSignUpOpen} colorScheme={"red"}>Sign up</Button>
+                            <Button onClick={onSignUpOpen} colorScheme={"red"}>회원 가입</Button>
                             </LightMode>
                         </>) : ( 
                             <Menu>
@@ -79,10 +79,10 @@ export default function Header() {
                                 <MenuList>
                                     {user?.is_host ? (
                                     <Link to="/rooms/upload">
-                                        <MenuItem>Upload room</MenuItem>
+                                        <MenuItem>숙소 업데이트</MenuItem>
                                     </Link>
                                     ) : null}
-                                    <MenuItem onClick={ onLogOut }>Log out</MenuItem>
+                                    <MenuItem onClick={ onLogOut }>로그아웃</MenuItem>
                                 </MenuList>
                             </Menu>
                              ) 

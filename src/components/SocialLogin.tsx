@@ -4,7 +4,7 @@ import { FaComment, FaGithub } from "react-icons/fa";
 export default function SocialLogin(){
     const kakaoParams = {
         client_id: "7a12da799e8d897b8f936259a2fe6c03",
-        redirect_uri: "http://127.0.0.1:3000/social/kakao",
+        redirect_uri: "https://chovychovy.xyz/social/kakao",
         response_type: "code",
     };
     const params = new URLSearchParams(kakaoParams).toString();
@@ -18,7 +18,7 @@ export default function SocialLogin(){
                 fontSize="xs" 
                 as="b"
             >
-            Or
+            또는
             </Text>
             <Divider />
         </HStack>
@@ -29,7 +29,7 @@ export default function SocialLogin(){
                 w="100%" 
                 leftIcon={<FaGithub />} 
             >
-                Continue with Github
+                깃허브로 로그인
             </Button>
             <Button 
                 as = "a" 
@@ -38,7 +38,7 @@ export default function SocialLogin(){
                 leftIcon={<FaComment />} 
                 colorScheme="yellow"
             >
-                Continue with Kakao
+                카카오로 로그인
             </Button>
         </VStack>
     </Box>

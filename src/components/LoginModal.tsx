@@ -75,8 +75,8 @@ export default function LoginModal({isOpen, onClose }: LoginModalProps){
                         />
                     </InputGroup>
                 </VStack>
-                {mutation.isError ? <Text color="red.500" textAlign={"center"}  fontSize="sm">Username or Password are wrong</Text> : null}
-                <Button isLoading={mutation.isLoading} type="submit" mt={4} colorScheme="red" w="100%">Log in</Button>
+                {mutation.isError ? <Text color="red.500" textAlign={"center"}  fontSize="sm">아이디와 패스워드를 확인해 주세요</Text> : null}
+                <Button isLoading={mutation.isLoading} type="submit" mt={4} colorScheme="red" w="100%">로그인</Button>
                 <SocialLogin /> 
             </ModalBody>
         </ModalContent>

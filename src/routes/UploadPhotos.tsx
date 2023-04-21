@@ -27,13 +27,13 @@ import {
           }}
         >
           <Container>
-            <Heading textAlign={"center"}>Upload a Photo</Heading>
+            <Heading textAlign={"center"}>사진 추가하기</Heading>
             <VStack spacing={5} mt={10}>
               <FormControl>
                 <Input {...register("file")} type="file" accept="image/*" />
               </FormControl>
               <Button w="full" colorScheme={"red"}>
-                Upload photos
+                사진 추가
               </Button>
             </VStack>
           </Container>

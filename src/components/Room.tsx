@@ -59,7 +59,7 @@ export default function Room({pk, imageUrl, name, rating, city, country, price, 
                     </Text>
                 </Box>
                 <Text fontSize={"sm"} color={gray}>
-                <Text as="b">${price}</Text>/ night 
+                <Text as="b">￦{price}</Text>/ 1박 
                 </Text>
             </VStack>
         </Link>
